@@ -80,6 +80,19 @@ export default {
  async created() {
     this.tasks = await this.fetchData();
   },
+    watch: {
+    tasks: {
+      handler() {
+        localStorage.setItem('tasks',JSON.stringify(this.tasks))
+      },
+      deep: true
+    }
+  },
+  mounted() {
+    if (localStorage.getItem("tasks")){
+      this.tasks = JSON.parse(localStorage.getItem("tasks"))
+    }
+  }
 };
 </script>
 
